@@ -1,14 +1,26 @@
 <!DOCTYPE html>
 <html>
-<body>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</head>
 
+<body>
 <p>Enter string, press "sUbmIt" to mAkE iT loOk lIkE thIs:</p>
 
-<form method="post" action= "{{url_for('process_input')}}">
-    iNpuT:  <input type="text" name="finput"><br>
-    oUtpuT: <input type="text" name="foutput"><br>
-    <button>sUbmIt</button>
+<form><!--method="post" action= "{{url_for('process_input')}}">-->
+    iNpuT:  <input type="text" name="finput" id="finput" size=30><br>
+    oUtpuT: <input type="text" name="foutput" id="foutput" size=30><br>
+    <button type='button' onclick="MyFunction()">sUbmIt</button>
 </form>
 
+<script>
+    function MyFunction() {
+        $.post('/process_input', {
+            text: document.getElementById("finput").value
+        }).done(function(response) {
+            document.getElementById("foutput").setAttribute("value", response["text"]);
+        });
+    }
+</script>
 </body>
 </html>

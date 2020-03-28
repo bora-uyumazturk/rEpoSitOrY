@@ -10,4 +10,4 @@ def index():
 
 @app.route('/process_input', methods=['GET', 'POST'])
 def process_input():
-    return render_template('response.html', processed = process(request.form['finput']))
+    return jsonify({'text':process(request.form['text'])})
