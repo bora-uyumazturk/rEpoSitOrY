@@ -3,13 +3,21 @@ import random
 def process(s):
     result = ""
     i = 0
+    prev = False 
     while(i < len(s)):
         c = s[i]
-        if random.random() > 0.5:
+        threshold = 0.25
+        if prev:
+            threshold = 0.75
+        if i == 0:
+            threshold = 2.0
+        if random.random() > threshold:
             result += c.upper()
+            prev = True 
         else:
             result += c
-        if random.random() > 0.05 or c.isspace():
+            prev = False
+        if random.random() > 0.025 or c.isspace():
             i+=1
     return result
 
